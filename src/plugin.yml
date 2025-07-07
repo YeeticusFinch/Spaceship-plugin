@@ -1,0 +1,39 @@
+main: com.lerdorf.spaceships.MainPlugin
+name: FancySpaceShips
+author: carl_alex
+version: 1.0
+api-version: 1.13
+
+commands:
+   turret:
+      description: Makes a turret
+      usage: /turret [options]
+      permission: Spaceships.turret
+   chair:
+      description: Makes a chair
+      usage: /chair [options]
+      permission: Spaceships.chair
+   radar:
+      description: Makes a radar
+      usage: /radar [options]
+      permission: Spaceships.radar
+   transceiver:
+      description: Makes a transceiver
+      usage: /transceiver [options]
+      permission: Spaceships.transceiver
+   spaceitem:
+      description: Spaceitem stuff
+      usage: /spaceitem [options]
+      permission: Spaceships.spaceitem
+   taurus:
+      description: Taurus stuff
+      usage: /taurus [options]
+      permission: Spaceships.taurus
+   travel:
+      description: Travel to any planet or moon
+      usage: /travel [destination]
+      permission: Spaceships.travel
+   sensor:
+      description: Makes a sensor
+      usage: /sensor [options]
+      permission: Spaceships.sensor
