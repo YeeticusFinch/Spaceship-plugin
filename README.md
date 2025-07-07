@@ -102,3 +102,9 @@ Fun fact: an entity can't teleport if a player is sitting on it. So the solution
 The next challenge was for rotating the ship. When a ship rotates, all entities should move and rotate to their proper positions. Problem is, they have to spin around the ship's axis of rotation (which is also a MoveCraft variable). However, this isn't as simple as rotating a vector around a point. Minecraft's block coordinates are discretized, meaning that when a ship rotates, it's not as simple as rotating around a center coordinate. If your ship is 4 blocks wide, the center point is in-between 2 blocks, it doesn't fall on any block. And to make it even more annoying, coordinates fall on corners of blocks. <0, 0, 0> is the corner of a block. The center location of a block is <0.5, 0.5, 0.5>. 
 
 TLDR to rotate entities with the ship I couldn't just rotate a vector around a point, because then an entity that is on a block will be moved to the corner of that block, and then upon the next rotation it will move to the center of another block, moving diagonally by half a block each rotation until it has left your ship entirely. To solve this, I had to come up with a function that uses floor and ceiling functions to round the coordinate numbers and then add 0.5 to keep it in the center of the original block.
+
+## Why don't I see any releases?
+
+Good question! That's because this project is currently split across a plugin and a datapack, and it's still a Work In Progress. Also, the Space dimension with all the planets was manually created (I haven't figured out how to get that to create itself automatically, seeing that it needs a much larger build height to fit those planets).
+
+Also, the resourcepack is mixed in with my general server resourcepack, I haven't yet separated the parts that are unique to this project (hey I reuse a lot of assets)
