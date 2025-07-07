@@ -15,20 +15,6 @@ Just like in the VoidShips plugin, ships are built out of blocks. Rather than ha
 
 Yes, this plugin is heavily integrated with MoveCraft, with a couple of changes and additions. This plugin adds custom block-entities, including pilot seats, radar dishes, turrets, maps, custom items, and of course, planets (with custom dimensions for each one.
 
-### Challenges
-
-The main challenge was to make all the entities follow the Movecraft ships as they move. For linear movement that isn't so bad, just teleport all entities within the ship a displacement equal to the ship's displacement each time it moves. MoveCraft gives us move events to facilitate this. 
-
-However, a lot of these entities can have a player sitting on them. Players can sit on the chairs, and players can sit inside turrets. 
-
-Fun fact: an entity can't teleport if a player is sitting on it. So the solution was to use some delayed tasks to dismount the player, teleport both the player and the entity, then remount the player. I ended up making a custom teleport function that automatically does this.
-
-The next challenge was for rotating the ship. When a ship rotates, all entities should move and rotate to their proper positions. Problem is, they have to spin around the ship's axis of rotation (which is also a MoveCraft variable). However, this isn't as simple as rotating a vector around a point. Minecraft's block coordinates are discretized, meaning that when a ship rotates, it's not as simple as rotating around a center coordinate. If your ship is 4 blocks wide, the center point is in-between 2 blocks, it doesn't fall on any block. And to make it even more annoying, coordinates fall on corners of blocks. <0, 0, 0> is the corner of a block. The center location of a block is <0.5, 0.5, 0.5>. 
-
-TLDR to rotate entities with the ship I couldn't just rotate a vector around a point, because then an entity that is on a block will be moved to the corner of that block, and then upon the next rotation it will move to the center of another block, moving diagonally by half a block each rotation until it has left your ship entirely. To solve this, I had to come up with a function that uses floor and ceiling functions to round the coordinate numbers and then add 0.5 to keep it in the center of the original block.
-
-#### Anyways, on to the rest of the features...
-
 ### Custom Block-Entities
 
 #### Pilot Seats
@@ -105,7 +91,14 @@ Uranus with two of its moons.
 ![image](https://github.com/user-attachments/assets/115f81b6-e83d-4a54-8057-c2166733d860)
 Neptune with one of its moons.
 
+### Challenges
 
+The main challenge was to make all the entities follow the Movecraft ships as they move. For linear movement that isn't so bad, just teleport all entities within the ship a displacement equal to the ship's displacement each time it moves. MoveCraft gives us move events to facilitate this. 
 
+However, a lot of these entities can have a player sitting on them. Players can sit on the chairs, and players can sit inside turrets. 
 
+Fun fact: an entity can't teleport if a player is sitting on it. So the solution was to use some delayed tasks to dismount the player, teleport both the player and the entity, then remount the player. I ended up making a custom teleport function that automatically does this.
 
+The next challenge was for rotating the ship. When a ship rotates, all entities should move and rotate to their proper positions. Problem is, they have to spin around the ship's axis of rotation (which is also a MoveCraft variable). However, this isn't as simple as rotating a vector around a point. Minecraft's block coordinates are discretized, meaning that when a ship rotates, it's not as simple as rotating around a center coordinate. If your ship is 4 blocks wide, the center point is in-between 2 blocks, it doesn't fall on any block. And to make it even more annoying, coordinates fall on corners of blocks. <0, 0, 0> is the corner of a block. The center location of a block is <0.5, 0.5, 0.5>. 
+
+TLDR to rotate entities with the ship I couldn't just rotate a vector around a point, because then an entity that is on a block will be moved to the corner of that block, and then upon the next rotation it will move to the center of another block, moving diagonally by half a block each rotation until it has left your ship entirely. To solve this, I had to come up with a function that uses floor and ceiling functions to round the coordinate numbers and then add 0.5 to keep it in the center of the original block.
